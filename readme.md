@@ -2,6 +2,6 @@
 
 ### Docente: [Marcelo Romulo Fernandes](https://github.com/persapiens) - marcelo.fernandes@ifrn.edu.br
 
-### Discente: [Sérgio Henrique Oliveira de Azevedo](https://github.com/sergioh665) - sergio.h@ifrn.edu.br
+### Discente: [Sérgio Henrique Oliveira de Azevedo](https://github.com/sergioh665) - sergio.h@academico.ifrn.edu.br
 
 ### Repositório de referência/estudo [AQUI](https://github.com/persapiens-classes/ifrn-software-quality)
