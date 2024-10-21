@@ -19,7 +19,7 @@ jobs: #definir o que sera executado
       - name: Set up Node.js #configurar o ambiente node
         uses: actions/setup-node@v4.0.4
         with:
-          node-version: "21.7.1" #versão do node "14"
+          node-version: "21.7.1" #versão do node
 
       - name: Install dependencies #instalar as dependencias
         run: npm install
