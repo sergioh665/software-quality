@@ -14,12 +14,12 @@ jobs: #definir o que sera executado
 
     steps: #passos
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4.2.1
 
       - name: Set up Node.js #configurar o ambiente node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4.0.4
         with:
-          node-version: "21.7.1" #versão do node "14"
+          node-version: "21.7.1" #versão do node
 
       - name: Install dependencies #instalar as dependencias
         run: npm install
@@ -31,7 +31,7 @@ jobs: #definir o que sera executado
       #        run: npm run build
 
       - name: Upload production-ready build files #fazer o upload dos arquivos de build ou deploy
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4.4.3
         with:
           name: build
           path: dist/
