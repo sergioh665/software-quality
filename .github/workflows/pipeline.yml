@@ -17,9 +17,9 @@ jobs: #definir o que sera executado
         uses: actions/checkout@v2
 
       - name: Set up Node.js #configurar o ambiente node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
-          node-version: "14" #versão do node "14"
+          node-version: "21.7.1" #versão do node "14"
 
       - name: Install dependencies #instalar as dependencias
         run: npm install
