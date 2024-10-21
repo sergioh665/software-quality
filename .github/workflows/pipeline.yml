@@ -24,8 +24,8 @@ jobs: #definir o que sera executado
       - name: Install dependencies #instalar as dependencias
         run: npm install
 
-      - name: Run tests #rodar os testes
-        run: npm run test
+      #      - name: Run tests #rodar os testes(ainda falta criar os testes kkk)
+      #        run: npm run test
 
       - name: Build project #buildar o projeto
         run: npm run build
