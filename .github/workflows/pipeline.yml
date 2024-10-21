@@ -1,0 +1,37 @@
+name: Vue.js CI #nome do workflow
+
+on: #definir quando o workflow será executado
+  push: #quando houver um push na branch main
+    branches:
+      - main
+  pull_request: #quando houver um pull request na branch main
+    branches:
+      - main
+
+jobs: #definir o que sera executado
+  build: #nome do trabalho "job", pode ser qualquer um
+    runs-on: ubuntu-latest #definir o ambiente onde vai ser executado (ubuntu)
+
+    steps: #passos
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js #configurar o ambiente node
+        uses: actions/setup-node@v2
+        with:
+          node-version: "14" #versão do node "14"
+
+      - name: Install dependencies #instalar as dependencias
+        run: npm install
+
+      #      - name: Run tests #rodar os testes(ainda falta criar os testes kkk)
+      #        run: npm run test
+
+      #      - name: Build project #buildar o projeto
+      #        run: npm run build
+
+      - name: Upload production-ready build files #fazer o upload dos arquivos de build ou deploy
+        uses: actions/upload-artifact@v3
+        with:
+          name: build
+          path: dist/
