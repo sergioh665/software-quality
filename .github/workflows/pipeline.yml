@@ -19,7 +19,7 @@ jobs: #definir o que sera executado
       - name: Set up Node.js #configurar o ambiente node
         uses: actions/setup-node@v2
         with:
-          node-version: "14"
+          node-version: "14" #versão do node "14"
 
       - name: Install dependencies #instalar as dependencias
         run: npm install
@@ -31,7 +31,7 @@ jobs: #definir o que sera executado
         run: npm run build
 
       - name: Upload production-ready build files #fazer o upload dos arquivos de build ou deploy
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3
         with:
           name: build
           path: dist/
