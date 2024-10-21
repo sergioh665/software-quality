@@ -31,7 +31,7 @@ jobs: #definir o que sera executado
         run: npm run build
 
       - name: Upload production-ready build files #fazer o upload dos arquivos de build ou deploy
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: build
           path: dist/
