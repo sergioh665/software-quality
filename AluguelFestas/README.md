@@ -20,25 +20,31 @@ Este projeto é uma aplicação Vue.js para gerenciamento de aluguel de festas.
 git clone https://github.com/sergioh665/software-quality
 ```
 
-### 2. Entrar na pasta
+### 2. Entrar no repositório
+
+```sh
+cd software-quality
+```
+
+### 3. Entrar na pasta 'AluguelFestas'
 
 ```sh
 cd AluguelFestas
 ```
 
-### 3. Instalar dependências
+### 4. Instalar dependências
 
 ```sh
 npm install
 ```
 
-### 4. Compilar e recarregar automaticamente para desenvolvimento
+### 5. Compilar e recarregar automaticamente para desenvolvimento
 
 ```sh
 npm run dev
 ```
 
-### 5. Compilar e minificar para produção
+### 6. Compilar e minificar para produção
 
 ```sh
 npm run build
