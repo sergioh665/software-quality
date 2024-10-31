@@ -4,8 +4,13 @@ Este projeto é uma aplicação Vue.js para gerenciamento de aluguel de festas.
 
 ## Requisitos
 
-- [Node.js](https://nodejs.org/pt) ![Logo do node](https://nodejs.org/static/logos/jsIconGreen.svg) (versão 21.7.1)
-- [npm](https://www.npmjs.com/) ![Logo do NPM](https://github.com/npm/logos/blob/master/npm%20square/n-64.png?raw=true) (gerenciador de pacotes do Node.js)
+- [Node.js](https://nodejs.org/pt) (versão 21.7.1)
+  <br>
+  ![Logo do node](https://nodejs.org/static/logos/jsIconGreen.svg)
+
+- [npm](https://www.npmjs.com/) (gerenciador de pacotes do Node.js)
+  <br>
+  ![Logo do NPM](https://github.com/npm/logos/blob/master/npm%20square/n-64.png?raw=true)
 
 ## Configuração do Projeto
 
