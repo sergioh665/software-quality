@@ -38,14 +38,16 @@ cd AluguelFestas
 npm install
 ```
 
-### 5. Compilar e recarregar automaticamente para desenvolvimento
+### 5. Iniciar o servidor de desenvolvimento
 
 ```sh
 npm run dev
 ```
+> O servidor ficará disponível em um endereço local, geralmente http://localhost:5173/ .
 
-### 6. Compilar e minificar para produção
+## Compilação e minificação do código para produção
 
 ```sh
 npm run build
 ```
+> Isso gera uma versão otimizada da aplicação. Os arquivos resultantes são colocados no diretório `dist`.
