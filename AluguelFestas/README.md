@@ -1,28 +1,44 @@
-# vue-frontend
+# Aplicação para a disciplina de Qualidade de Software
 
-This template should help get you started developing with Vue 3 in Vite.
+Este projeto é uma aplicação Vue.js para gerenciamento de aluguel de festas.
 
-## Recommended IDE Setup
+## Requisitos
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+- [Node.js](https://nodejs.org/pt) (versão 21.7.1)
+  <br>
+  ![Logo do node](https://nodejs.org/static/logos/jsIconGreen.svg)
 
-## Customize configuration
+- [npm](https://www.npmjs.com/) (gerenciador de pacotes do Node.js)
+  <br>
+  ![Logo do NPM](https://github.com/npm/logos/blob/master/npm%20square/n-64.png?raw=true)
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+## Configuração do Projeto
 
-## Project Setup
+### 1. Clonar o repositório
+
+```sh
+git clone https://github.com/sergioh665/software-quality
+```
+
+### 2. Entrar na pasta
+
+```sh
+cd AluguelFestas
+```
+
+### 3. Instalar dependências
 
 ```sh
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+### 4. Compilar e recarregar automaticamente para desenvolvimento
 
 ```sh
 npm run dev
 ```
 
-### Compile and Minify for Production
+### 5. Compilar e minificar para produção
 
 ```sh
 npm run build
