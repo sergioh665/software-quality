@@ -1,0 +1,16 @@
+{
+	"name": "Vue.js Dev Container", // nome do container
+	"image": "mcr.microsoft.com/devcontainers/typescript-node:1-22-bookworm", //imagem do docker (node.js e ts)
+	"features": {}, // adicionar funcionalidades aqui 
+	"forwardPorts": [5173], // definir a porta
+	"postCreateCommand": "npm install", //  instalar as dependências do projeto usando npm
+	"customizations": { // extensões
+	  "vscode": {
+		"extensions": [
+		  "esbenp.prettier-vscode", // ferramenta de formatação de código
+		  "dbaeumer.vscode-eslint" // identificar e corrigir problemas no código.
+		]
+	  }
+	}
+	//"remoteUser": "node"
+}
