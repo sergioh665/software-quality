@@ -6,11 +6,19 @@
 	"postCreateCommand": "npm install", //  instalar as dependências do projeto usando npm
 	"customizations": { // extensões
 	  "vscode": {
-		"extensions": [
+		"extensions": [ // extensões do vscode
 		  "esbenp.prettier-vscode", // ferramenta de formatação de código
-		  "dbaeumer.vscode-eslint" // identificar e corrigir problemas no código.
+		  "dbaeumer.vscode-eslint", // identificar e corrigir problemas no código.
+			"adpyke.codesnap", // tirar print do código
+			"ms-azuretools.vscode-docker", // extensão do docker
+			"ms-vscode-remote.remote-containers", // extensão do remote containers
+			"github.vscode-github-actions", // github actions
+			"github.copilot", // github copilot
+			"github.copilot-chat", // github copilot chat
+			"miguelsolorio.min-theme", // tema do vscode
+			"vue.volar" // vue.js
 		]
 	  }
 	}
-	//"remoteUser": "node"
+	// "remoteUser": "node"
 }
