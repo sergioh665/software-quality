@@ -24,11 +24,17 @@ jobs: #definir o que sera executado
       - name: Install dependencies #instalar as dependencias
         run: npm install
 
-      #      - name: Run tests #rodar os testes(ainda falta criar os testes kkk)
-      #        run: npm run test
+      # - name: Run tests #rodar os testes (ainda falta criar os testes kkk)
+      #   run: npm run test
 
-      #      - name: Build project #buildar o projeto
-      #        run: npm run build
+      # - name: Build project #buildar o projeto
+      #   run: npm run build
+
+      - name: Build Docker image #construir a imagem Docker
+        run: docker build -t pmd-cpd . #Este comando constrói a imagem Docker usando o Dockerfile pmd-cpd
+
+      - name: Run CPD #executar o CPD para detectar código duplicado
+        run: docker run --rm -v ${{ github.workspace }}:/app pmd-cpd
 
       - name: Upload production-ready build files #fazer o upload dos arquivos de build ou deploy
         uses: actions/upload-artifact@v4.4.3

@@ -1,4 +1,8 @@
 {
     "name": "software-quality",
-    "version": "1.0.0"
+    "version": "1.0.0",
+    "scripts": {
+        "cpd": "path/to/pmd-bin-<version>/bin/run.sh cpd --minimum-tokens 100 --files . --language javascript"
+    },
+    "_comment_cpd": "O script 'cpd' executa o PMD Copy/Paste Detector (CPD) para identificar código duplicado em arquivos JavaScript com um mínimo de 100 tokens."
 }
