@@ -1,6 +1,6 @@
 # Repositório para a disciplina de [Qualidade de Software](https://classroom.google.com/u/1/c/NzIzMTAwMjAzMDgx)
 
-## [Como configurar e instalar](https://github.com/sergioh665/software-quality/tree/main/AluguelFestas)
+## [Como configurar e instalar](https://github.com/sergioh665/software-quality/tree/main/AluguelFestas#readme)
 
 ### Docente: [Marcelo Romulo Fernandes](https://github.com/persapiens) - marcelo.fernandes@ifrn.edu.br
 
