@@ -28,7 +28,7 @@ jobs: #definir o que sera executado
         run: npm install -g jscpd
 
       - name: Check for code duplication #verificar duplicação de código nos arquivos especificados
-        run: jscpd AluguelFestas/codigoDuplicado.js AluguelFestas/codigoTeste.js
+        run: jscpd AluguelFestas/src/views/Temas #verificar arquivos duplicados na pasta Temas
 
       #      - name: Run tests #rodar os testes(ainda falta criar os testes kkk)
       #        run: npm run test

@@ -1,14 +1,11 @@
 <script setup>
-import Nav from '../../components/Nav.vue';
+import HeaderTemas from './HeaderTemas.vue';
 import api from '../../services/api.js';
+import { mdiAccountGroup } from '@mdi/js';
 </script>
 <template>
     <div class="container">
-        <Nav></Nav>
-        <section class="container-title">
-            <h1>TEMAS</h1>
-            <svg-icon type="mdi" style="color: #CF3A69" :size="32" class="icone" :path="iconGroup"></svg-icon>
-        </section>
+        <HeaderTemas :iconPath="iconGroup" />
         <div class="container-form">
             <label for="nome">Nome</label>
             <input type="text" class="input-text" v-model="tema.name" placeholder="Lustre colorido, Bola, Banquinho ..."
@@ -41,16 +38,10 @@ import api from '../../services/api.js';
     </div>
 </template>
 <script>
-import SvgIcon from '@jamescoyle/vue-icon';
-import { mdiAccountGroup } from '@mdi/js';
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 
 export default {
-
-    components: {
-        SvgIcon
-    },
     data() {
         return {
             iconGroup: mdiAccountGroup,
@@ -68,7 +59,6 @@ export default {
     created() {
         this.getItens();
         if (this.$route.params.id != null || undefined) {
-            console.log('to no if');
             this.getTema(this.$route.params.id);
             this.editable = true;
         }
@@ -86,7 +76,6 @@ export default {
                 .post("/themes/", this.tema)
                 .then(() => {
                     this.exibirToast();
-                    console.log('Tema cadastrado com sucesso.')
                 })
                 .catch((error) => {
                     console.log(error);
@@ -96,7 +85,6 @@ export default {
             api
                 .get("/themes/" + id + "/")
                 .then((resp) => {
-                    console.log(resp.data);
                     this.tema = resp.data;
                     this.selectedItems = this.tema.itens;
                 })
@@ -124,7 +112,6 @@ export default {
                 .get("/itens/")
                 .then((res) => {
                     this.itens = res.data;
-                    console.log(res.data);
                 })
                 .catch((error) => {
                     console.log(error);
@@ -206,4 +193,3 @@ label {
     margin-right: 1em;
 }
 </style>
-  
