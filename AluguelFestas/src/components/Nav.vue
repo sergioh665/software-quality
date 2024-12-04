@@ -3,7 +3,7 @@ import { RouterLink, RouterView } from 'vue-router'
 </script>
 <template>
     <nav>
-        <img src="../assets/logo01.svg" alt="Logo da empresa">
+        <img src="../assets/logo.svg" alt="Logo da empresa">
         <section class="options">
             <RouterLink to="/">Home</RouterLink>
             <RouterLink to="/clientes">Clientes</RouterLink>
