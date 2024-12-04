@@ -1,14 +1,12 @@
 <script setup>
 import Nav from '../../components/Nav.vue';
 import api from '../../services/api.js';
+import HeaderTemas from './HeaderTemas.vue';
+
 </script>
 <template>
     <div class="container">
-        <Nav></Nav>
-        <section class="container-title">
-            <h1>TEMAS</h1>
-            <svg-icon type="mdi" style="color: #8F4254" :size="30" class="icone" :path="iconParty"></svg-icon>
-        </section>
+        <HeaderTemas :iconPath="iconParty" :iconStyle="{ color: '#8F4254' }" :iconSize="30" />
         <v-btn class="bnt" v-bind="props" @click="this.$router.push('/form-temas');">
             Novo
         </v-btn>
