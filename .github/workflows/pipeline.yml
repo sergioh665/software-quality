@@ -22,9 +22,9 @@ jobs: #definir o que sera executado
           node-version: "21.7.1" #versão do node
 
       - name: Set up Java JDK #configurar o Java
-        uses: actions/setup-java@v21 #usar a action setup-java
+        uses: actions/setup-java@v3 #usar a action setup-java
         with:
-          java-version: "11" #definir a versão do Java
+          java-version: "21" #definir a versão do Java
           distribution: "adoptopenjdk" #distribuição
 
       - name: Install dependencies #instalar as dependencias
