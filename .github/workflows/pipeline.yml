@@ -38,8 +38,8 @@ jobs: #definir o que sera executado
 
       - name: Generate UML Diagrams #gerar diagramas UML
         run: | #script para gerar diagramas UML
-          chmod +x gerarUML.bat 
-          ./gerarUML.bat 
+          chmod +x gerarUML.sh
+          ./gerarUML.sh 
 
       - name: Upload UML Diagrams #fazer o upload dos diagramas UML
         uses: actions/upload-artifact@v4.4.3 #usar a action upload-artifact
