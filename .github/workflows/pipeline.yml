@@ -25,7 +25,7 @@ jobs: #definir o que sera executado
         uses: actions/setup-java@v3 #usar a action setup-java
         with:
           java-version: "21" #definir a versão do Java
-          distribution: "adoptopenjdk" #distribuição
+          distribution: "temurin" #distribuição
 
       - name: Install dependencies #instalar as dependencias
         run: npm install #instalar as dependencias
