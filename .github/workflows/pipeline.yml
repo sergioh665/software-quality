@@ -21,6 +21,12 @@ jobs: #definir o que sera executado
         with:
           node-version: "21.7.1" #versão do node
 
+      - name: Set up Java JDK #configurar o Java
+        uses: actions/setup-java@v21 #usar a action setup-java
+        with:
+          java-version: "11" #definir a versão do Java
+          distribution: "adoptopenjdk" #distribuição
+
       - name: Install dependencies #instalar as dependencias
         run: npm install #instalar as dependencias
 
@@ -29,17 +35,17 @@ jobs: #definir o que sera executado
 
       - name: Check for code duplication #verificar duplicação de código nos arquivos especificados
         run: jscpd AluguelFestas/src/views/Temas #verificar arquivos duplicados na pasta Temas
-      
+
       - name: Install Graphviz #instalar Graphviz
         run: sudo apt-get install graphviz #instalar Graphviz
-      
+
       - name: Download PlantUML #baixar PlantUML para gerar diagramas
         run: wget http://sourceforge.net/projects/plantuml/files/plantuml.jar/download -O plantuml.jar #baixar PlantUML
 
       - name: Generate UML Diagrams #gerar diagramas UML
         run: | #script para gerar diagramas UML
           chmod +x gerarUML.sh
-          ./gerarUML.sh 
+          ./gerarUML.sh
 
       - name: Upload UML Diagrams #fazer o upload dos diagramas UML
         uses: actions/upload-artifact@v4.4.3 #usar a action upload-artifact
