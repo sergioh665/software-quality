@@ -13,22 +13,39 @@ jobs: #definir o que sera executado
     runs-on: ubuntu-latest #definir o ambiente onde vai ser executado (ubuntu)
 
     steps: #passos
-      - name: Checkout repository
-        uses: actions/checkout@v4.2.1
+      - name: Checkout repository #clonar o repositório
+        uses: actions/checkout@v4.2.1 #usar a action checkout
 
       - name: Set up Node.js #configurar o ambiente node
-        uses: actions/setup-node@v4.0.4
+        uses: actions/setup-node@v4.0.4 #usar a action setup-node
         with:
           node-version: "21.7.1" #versão do node
 
       - name: Install dependencies #instalar as dependencias
-        run: npm install
+        run: npm install #instalar as dependencias
 
       - name: Install jscpd globally #instalar jscpd globalmente
-        run: npm install -g jscpd
+        run: npm install -g jscpd #instalar jscpd globalmente
 
       - name: Check for code duplication #verificar duplicação de código nos arquivos especificados
         run: jscpd AluguelFestas/src/views/Temas #verificar arquivos duplicados na pasta Temas
+      
+      - name: Install Graphviz #instalar Graphviz
+        run: sudo apt-get install graphviz #instalar Graphviz
+      
+      - name: Download PlantUML #baixar PlantUML para gerar diagramas
+        run: wget http://sourceforge.net/projects/plantuml/files/plantuml.jar/download -O plantuml.jar #baixar PlantUML
+
+      - name: Generate UML Diagrams #gerar diagramas UML
+        run: | #script para gerar diagramas UML
+          chmod +x gerarUML.bat 
+          ./gerarUML.bat 
+
+      - name: Upload UML Diagrams #fazer o upload dos diagramas UML
+        uses: actions/upload-artifact@v2 #usar a action upload-artifact
+        with:
+          name: uml-diagrams # Nome do artefato
+          path: diagrams/ # Caminho para os arquivos a serem enviados
 
       #      - name: Run tests #rodar os testes(ainda falta criar os testes kkk)
       #        run: npm run test
@@ -40,4 +57,4 @@ jobs: #definir o que sera executado
         uses: actions/upload-artifact@v4.4.3
         with:
           name: build
-          path: dist/
+          path: dis
