@@ -42,22 +42,15 @@ jobs: #definir o que sera executado
       - name: Download PlantUML #baixar PlantUML para gerar diagramas
         run: wget http://sourceforge.net/projects/plantuml/files/plantuml.jar/download -O plantuml.jar #baixar PlantUML
 
-      - name: List files in UML directory
-        run: ls -l uml/
-
-      - name: Generate UML Diagrams
-        run: |
-          mkdir -p diagrams  # Garantir que o diretório diagrams exista
+      - name: Generate UML Diagrams #gerar diagramas UML
+        run: | #script para gerar diagramas UML
           java -jar plantuml.jar -tpng -o diagrams uml/todos.puml
 
-      - name: List generated UML diagrams
-        run: ls -l diagrams/
-
-      - name: Upload UML Diagrams
-        uses: actions/upload-artifact@v4.4.3
+      - name: Upload UML Diagrams #fazer o upload dos diagramas UML
+        uses: actions/upload-artifact@v4.4.3 #usar a action upload-artifact
         with:
-          name: diagrams
-          path: diagrams/
+          name: diagrams # Nome do artefato
+          path: uml/diagrams/ # Caminho para os arquivos a serem enviados
 
       - name: Upload production-ready build files #fazer o upload dos arquivos de build ou deploy
         uses: actions/upload-artifact@v4.4.3
