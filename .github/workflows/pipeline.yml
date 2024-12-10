@@ -42,21 +42,22 @@ jobs: #definir o que sera executado
       - name: Download PlantUML #baixar PlantUML para gerar diagramas
         run: wget http://sourceforge.net/projects/plantuml/files/plantuml.jar/download -O plantuml.jar #baixar PlantUML
 
-      - name: Generate UML Diagrams #gerar diagramas UML
-        run: | #script para gerar diagramas UML
+      - name: List files in UML directory
+        run: ls -l uml/
+
+      - name: Generate UML Diagrams
+        run: |
+          mkdir -p diagrams  # Garantir que o diretório diagrams exista
           java -jar plantuml.jar -tpng -o diagrams uml/todos.puml
 
-      - name: Upload UML Diagrams #fazer o upload dos diagramas UML
-        uses: actions/upload-artifact@v4.4.3 #usar a action upload-artifact
+      - name: List generated UML diagrams
+        run: ls -l diagrams/
+
+      - name: Upload UML Diagrams
+        uses: actions/upload-artifact@v4.4.3
         with:
-          name: diagrams # Nome do artefato
-          path: diagrams/ # Caminho para os arquivos a serem enviados
-
-      #      - name: Run tests #rodar os testes(ainda falta criar os testes kkk)
-      #        run: npm run test
-
-      #      - name: Build project #buildar o projeto
-      #        run: npm run build
+          name: diagrams
+          path: diagrams/
 
       - name: Upload production-ready build files #fazer o upload dos arquivos de build ou deploy
         uses: actions/upload-artifact@v4.4.3
