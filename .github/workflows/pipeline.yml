@@ -49,8 +49,8 @@ jobs: #definir o que sera executado
       - name: Upload UML Diagrams #fazer o upload dos diagramas UML
         uses: actions/upload-artifact@v4.4.3 #usar a action upload-artifact
         with:
-          name: diagrams # Nome do artefato
-          path: uml/diagrams/ # Caminho para os arquivos a serem enviados
+          name: uml-diagrams # Nome do artefato
+          path: diagrams/ # Caminho para os arquivos a serem enviados
 
       - name: Upload production-ready build files #fazer o upload dos arquivos de build ou deploy
         uses: actions/upload-artifact@v4.4.3
