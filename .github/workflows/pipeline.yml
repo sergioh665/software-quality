@@ -49,8 +49,8 @@ jobs: #definir o que sera executado
       - name: Upload UML Diagrams #fazer o upload dos diagramas UML
         uses: actions/upload-artifact@v4.4.3 #usar a action upload-artifact
         with:
-          name: uml-diagrams # Nome do artefato
-          path: uml/diagrams/ # Caminho para os arquivos a serem enviados
+          name: diagrams # Nome do artefato
+          path: diagrams/ # Caminho para os arquivos a serem enviados
 
       #      - name: Run tests #rodar os testes(ainda falta criar os testes kkk)
       #        run: npm run test
