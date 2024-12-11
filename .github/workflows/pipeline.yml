@@ -62,7 +62,7 @@ jobs: # Definir o que será executado
         uses: actions/upload-artifact@v4.4.3
         with:
           name: uml-diagram
-          path: diagrams/*.png # Caminho para os arquivos .png gerados
+          path: diagrams/ # Caminho para os arquivos .png gerados
 
       - name: Upload production-ready build files # Fazer o upload dos arquivos de build ou deploy
         uses: actions/upload-artifact@v4.4.3
