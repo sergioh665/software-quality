@@ -45,7 +45,10 @@ jobs:
       - name: Create simple UML file for testing
         run: |
           mkdir -p uml
-          echo "@startuml\nAlice -> Bob: Hello\nBob -> Alice: Hi\n@enduml" > uml/test.puml
+          echo "@startuml" > uml/test.puml
+          echo "Alice -> Bob: Hello" >> uml/test.puml
+          echo "Bob -> Alice: Hi" >> uml/test.puml
+          echo "@enduml" >> uml/test.puml
 
       - name: List contents of the 'uml' directory to verify file creation
         run: |
