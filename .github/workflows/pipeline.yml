@@ -40,7 +40,8 @@ jobs:
         run: sudo apt-get install -y graphviz
 
       - name: Download PlantUML
-        run: wget https://github.com/plantuml/plantuml/releases/download/v1.2023.10/plantuml-1.2023.10.jar -O plantuml.jar
+        run: |
+          wget https://github.com/plantuml/plantuml/releases/download/v1.2023.10/plantuml-1.2023.10.jar -O plantuml.jar
 
       - name: Verify PlantUML jar file
         run: ls -la plantuml.jar
@@ -49,7 +50,8 @@ jobs:
         run: java -jar plantuml.jar -version
 
       - name: Create simple UML file for testing
-        run: echo "@startuml\nAlice -> Bob: Hello\n@enduml" > uml/test.puml
+        run: |
+          echo "@startuml\nAlice -> Bob: Hello\n@enduml" > uml/test.puml
 
       - name: Generate UML Diagram from test.puml
         run: java -jar plantuml.jar -tpng -o diagrams uml/test.puml -verbose
