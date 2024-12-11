@@ -46,6 +46,10 @@ jobs: #definir o que sera executado
         run: | #script para gerar diagramas UML
           java -jar plantuml.jar -tpng -o diagrams uml/todos.puml
 
+      - name: List diagrams directory
+        run: |
+          ls -la diagrams/
+
       #      - name: Upload UML Diagrams #fazer o upload dos diagramas UML
       #        uses: actions/upload-artifact@v4.4.3 #usar a action upload-artifact
       #        with:
