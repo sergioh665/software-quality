@@ -1,71 +1,70 @@
-name: Vue.js CI # Nome do workflow
+name: Vue.js CI
 
-on: # Definir quando o workflow será executado
-  push: # Quando houver um push na branch main
+on:
+  push:
     branches:
       - main
-  pull_request: # Quando houver um pull request na branch main
+  pull_request:
     branches:
       - main
 
-jobs: # Definir o que será executado
-  build: # Nome do trabalho "job"
-    runs-on: ubuntu-latest # Definir o ambiente onde vai ser executado (ubuntu)
+jobs:
+  build:
+    runs-on: ubuntu-latest
 
-    steps: # Passos
-      - name: Checkout repository # Clonar o repositório
+    steps:
+      - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Set up Node.js # Configurar o ambiente node
+      - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: "21.7.1" # Versão do node
+          node-version: "21.7.1"
 
-      - name: Set up Java JDK # Configurar o Java
+      - name: Set up Java JDK
         uses: actions/setup-java@v3
         with:
-          java-version: "21" # Definir a versão do Java
-          distribution: "temurin" # Distribuição
+          java-version: "21"
+          distribution: "temurin"
 
-      - name: Install dependencies # Instalar as dependências
-        run: npm install # Instalar as dependências
+      - name: Install dependencies
+        run: npm install
 
-      - name: Install jscpd globally # Instalar jscpd globalmente
-        run: npm install -g jscpd # Instalar jscpd globalmente
+      - name: Install jscpd globally
+        run: npm install -g jscpd
 
-      - name: Check for code duplication # Verificar duplicação de código nos arquivos especificados
-        run: jscpd AluguelFestas/src/views/Temas # Verificar arquivos duplicados na pasta Temas
+      - name: Check for code duplication
+        run: jscpd AluguelFestas/src/views/Temas
 
-      - name: Install Graphviz # Instalar Graphviz
-        run: sudo apt-get install -y graphviz # Instalar Graphviz
+      - name: Install Graphviz
+        run: sudo apt-get install -y graphviz
 
-      - name: Download PlantUML # Baixar PlantUML para gerar diagramas
-        run: |
-          wget https://github.com/plantuml/plantuml/releases/download/v1.2023.10/plantuml-1.2023.10.jar -O plantuml.jar # URL dinâmica para sempre pegar a versão mais recente
+      - name: Download PlantUML
+        run: wget https://github.com/plantuml/plantuml/releases/download/v1.2023.10/plantuml-1.2023.10.jar -O plantuml.jar
 
-      - name: Create diagrams directory # Criar o diretório diagrams caso não exista
-        run: mkdir -p diagrams # Criar o diretório onde os diagramas serão gerados
+      - name: Verify PlantUML jar file
+        run: ls -la plantuml.jar
 
-      - name: List UML files # Verificar se os arquivos .puml estão presentes
-        run: |
-          ls -la uml/ # Verificar conteúdo da pasta 'uml'
+      - name: Check PlantUML version
+        run: java -jar plantuml.jar -version
 
-      - name: Generate UML Diagrams # Gerar diagramas UML com verbose para obter logs detalhados
-        run: |
-          java -jar plantuml.jar -tpng -o diagrams uml/todos.puml -verbose # Gerar os diagramas
+      - name: Create simple UML file for testing
+        run: echo "@startuml\nAlice -> Bob: Hello\n@enduml" > uml/test.puml
 
-      - name: List diagrams directory # Verificar se os arquivos foram gerados
-        run: |
-          ls -la diagrams/ # Listar arquivos no diretório diagrams
+      - name: Generate UML Diagram from test.puml
+        run: java -jar plantuml.jar -tpng -o diagrams uml/test.puml -verbose
 
-      - name: Upload UML diagram as artifact # Fazer o upload dos diagramas UML
+      - name: List diagrams directory
+        run: ls -la diagrams/
+
+      - name: Upload UML diagram as artifact
         uses: actions/upload-artifact@v4.4.3
         with:
           name: uml-diagram
-          path: diagrams/ # Caminho para os arquivos .png gerados
+          path: diagrams/*.png
 
-      - name: Upload production-ready build files # Fazer o upload dos arquivos de build ou deploy
+      - name: Upload production-ready build files
         uses: actions/upload-artifact@v4.4.3
         with:
           name: build
-          path: dist # Corrigir para o diretório correto de build do Vue.js
+          path: dist
