@@ -46,9 +46,13 @@ jobs: # Definir o que será executado
       - name: Create diagrams directory # Criar o diretório diagrams caso não exista
         run: mkdir -p diagrams # Criar o diretório onde os diagramas serão gerados
 
-      - name: Generate UML Diagrams # Gerar diagramas UML
+      - name: List UML files # Verificar se os arquivos .puml estão presentes
         run: |
-          java -jar plantuml.jar -tpng -o diagrams uml/todos.puml # Gerar os diagramas
+          ls -la uml/ # Verificar conteúdo da pasta 'uml'
+
+      - name: Generate UML Diagrams # Gerar diagramas UML com verbose para obter logs detalhados
+        run: |
+          java -jar plantuml.jar -tpng -o diagrams uml/todos.puml -verbose # Gerar os diagramas
 
       - name: List diagrams directory # Verificar se os arquivos foram gerados
         run: |
