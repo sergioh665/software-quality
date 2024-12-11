@@ -1,84 +1,76 @@
-name: Vue.js CI # Nome do workflow
+name: Vue.js CI
 
-on: # Definir quando o workflow será executado
-  push: # Quando houver um push na branch main
+on:
+  push:
     branches:
       - main
-  pull_request: # Quando houver um pull request na branch main
+  pull_request:
     branches:
       - main
 
-jobs: # Definir o que será executado
-  build: # Nome do trabalho "job", pode ser qualquer um
-    runs-on: ubuntu-latest # Definir o ambiente onde vai ser executado (Ubuntu)
+jobs:
+  build:
+    runs-on: ubuntu-latest
 
-    steps: # Passos
-      - name: Checkout repository # Clonar o repositório
-        uses: actions/checkout@v4.2.1 # Usar a action checkout
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4.2.1
 
-      - name: Set up Node.js # Configurar o ambiente Node.js
-        uses: actions/setup-node@v4.0.4 # Usar a action setup-node
+      - name: Set up Node.js
+        uses: actions/setup-node@v4.0.4
         with:
-          node-version: "21.7.1" # Versão do Node.js
+          node-version: "21.7.1"
 
-      - name: Set up Java JDK # Configurar o Java
-        uses: actions/setup-java@v3 # Usar a action setup-java
+      - name: Set up Java JDK
+        uses: actions/setup-java@v3
         with:
-          java-version: "21" # Definir a versão do Java
-          distribution: "temurin" # Distribuição do Java
+          java-version: "21"
+          distribution: "temurin"
 
-      - name: Install dependencies # Instalar as dependências
-        run: npm install # Instalar as dependências
+      - name: Install dependencies
+        run: npm install
 
-      - name: Install jscpd globally # Instalar jscpd globalmente
-        run: npm install -g jscpd # Instalar jscpd globalmente
+      - name: Install jscpd globally
+        run: npm install -g jscpd
 
-      - name: Check for code duplication # Verificar duplicação de código nos arquivos especificados
-        run: jscpd AluguelFestas/src/views/Temas # Verificar arquivos duplicados na pasta Temas
+      - name: Check for code duplication
+        run: jscpd AluguelFestas/src/views/Temas
 
-      - name: Install Graphviz # Instalar Graphviz
-        run: sudo apt-get install graphviz # Instalar Graphviz
+      - name: Install Graphviz
+        run: sudo apt-get install graphviz
 
-      - name: Download PlantUML # Baixar PlantUML para gerar diagramas
-        run: wget http://sourceforge.net/projects/plantuml/files/plantuml.jar/download -O plantuml.jar # Baixar PlantUML
+      - name: Download PlantUML
+        run: wget http://sourceforge.net/projects/plantuml/files/plantuml.jar/download -O plantuml.jar
 
-      # Criar um arquivo UML simples para garantir que o PlantUML funcione corretamente
       - name: Create simple UML file for testing
         run: |
           echo "@startuml\nAlice -> Bob: Hello\nBob -> Alice: Hi\n@enduml" > uml/test.puml
 
-      # Verificar se o arquivo .puml foi criado corretamente
-      - name: List UML directory to check test.puml existence
+      - name: List contents of the 'uml' directory to verify file creation
         run: |
           echo "Listing files in the uml directory:"
           ls -la uml/
 
-      # Criar o diretório de saída para os diagramas gerados
       - name: Create output directory for diagrams
         run: mkdir -p generated_diagrams
 
-      # Gerar os diagramas UML usando o arquivo de teste
+      - name: Verify if 'generated_diagrams' directory exists
+        run: |
+          echo "Listing files in generated_diagrams/:"
+          ls -la generated_diagrams/
+
       - name: Generate UML Diagram from test.puml
         run: |
           java -jar plantuml.jar -tpng -o generated_diagrams uml/test.puml -verbose
 
-      # Verificar o conteúdo do diretório onde os diagramas foram gerados
       - name: List generated diagrams directory
         run: |
           echo "Listing files in generated_diagrams/ after PlantUML generation:"
           ls -la generated_diagrams/
 
-      # Fazer o upload do artefato de diagrama gerado
       - name: Upload UML diagram as artifact
         uses: actions/upload-artifact@v4.4.3
         with:
           name: uml-diagram
           path: generated_diagrams/*.png
           if-no-files-found: warn
-
-      # Fazer o upload dos arquivos de build ou deploy
-      - name: Upload production-ready build files # Fazer o upload dos arquivos de build ou deploy
-        uses: actions/upload-artifact@v4.4.3
-        with:
-          name: build
-          path: dist
