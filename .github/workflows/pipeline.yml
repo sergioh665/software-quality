@@ -47,6 +47,10 @@ jobs: # Definir o que será executado
         run: |
           echo "@startuml\nAlice -> Bob: Hello\n@enduml" > uml/test.puml
 
+      # Criar o diretório de saída para os diagramas gerados
+      - name: Create output directory for diagrams
+        run: mkdir -p generated_diagrams
+
       # Gerar os diagramas UML usando o arquivo de teste
       - name: Generate UML Diagram from test.puml
         run: |
