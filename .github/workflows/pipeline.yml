@@ -56,9 +56,14 @@ jobs:
       - name: Ensure diagrams directory exists
         run: mkdir -p generated_diagrams
 
-      - name: Generate UML Diagram from test.puml
+      - name: Check if the UML file exists
         run: |
-          java -jar plantuml.jar -tpng -o generated_diagrams uml/test.puml -verbose || { echo 'PlantUML failed'; exit 1; }
+          echo "Checking if the file exists at path: uml/test.puml"
+          if [ -f uml/test.puml ]; then echo "File exists"; else echo "File does not exist"; fi
+
+      - name: Generate UML Diagram with verbose output
+        run: |
+          java -jar plantuml.jar -tpng -o generated_diagrams uml/test.puml -verbose
 
       - name: List generated diagrams directory
         run: |
