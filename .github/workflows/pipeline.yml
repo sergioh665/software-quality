@@ -1,69 +1,67 @@
-name: Vue.js CI #nome do workflow
+name: Vue.js CI # Nome do workflow
 
-on: #definir quando o workflow será executado
-  push: #quando houver um push na branch main
+on: # Definir quando o workflow será executado
+  push: # Quando houver um push na branch main
     branches:
       - main
-  pull_request: #quando houver um pull request na branch main
+  pull_request: # Quando houver um pull request na branch main
     branches:
       - main
 
-jobs: #definir o que sera executado
-  build: #nome do trabalho "job", pode ser qualquer um
-    runs-on: ubuntu-latest #definir o ambiente onde vai ser executado (ubuntu)
+jobs: # Definir o que será executado
+  build: # Nome do trabalho "job"
+    runs-on: ubuntu-latest # Definir o ambiente onde vai ser executado (ubuntu)
 
-    steps: #passos
-      - name: Checkout repository #clonar o repositório
-        uses: actions/checkout@v4.2.1 #usar a action checkout
+    steps: # Passos
+      - name: Checkout repository # Clonar o repositório
+        uses: actions/checkout@v2
 
-      - name: Set up Node.js #configurar o ambiente node
-        uses: actions/setup-node@v4.0.4 #usar a action setup-node
+      - name: Set up Node.js # Configurar o ambiente node
+        uses: actions/setup-node@v3
         with:
-          node-version: "21.7.1" #versão do node
+          node-version: "21.7.1" # Versão do node
 
-      - name: Set up Java JDK #configurar o Java
-        uses: actions/setup-java@v3 #usar a action setup-java
+      - name: Set up Java JDK # Configurar o Java
+        uses: actions/setup-java@v3
         with:
-          java-version: "21" #definir a versão do Java
-          distribution: "temurin" #distribuição
+          java-version: "21" # Definir a versão do Java
+          distribution: "temurin" # Distribuição
 
-      - name: Install dependencies #instalar as dependencias
-        run: npm install #instalar as dependencias
+      - name: Install dependencies # Instalar as dependências
+        run: npm install # Instalar as dependências
 
-      - name: Install jscpd globally #instalar jscpd globalmente
-        run: npm install -g jscpd #instalar jscpd globalmente
+      - name: Install jscpd globally # Instalar jscpd globalmente
+        run: npm install -g jscpd # Instalar jscpd globalmente
 
-      - name: Check for code duplication #verificar duplicação de código nos arquivos especificados
-        run: jscpd AluguelFestas/src/views/Temas #verificar arquivos duplicados na pasta Temas
+      - name: Check for code duplication # Verificar duplicação de código nos arquivos especificados
+        run: jscpd AluguelFestas/src/views/Temas # Verificar arquivos duplicados na pasta Temas
 
-      - name: Install Graphviz #instalar Graphviz
-        run: sudo apt-get install graphviz #instalar Graphviz
+      - name: Install Graphviz # Instalar Graphviz
+        run: sudo apt-get install -y graphviz # Instalar Graphviz
 
-      - name: Download PlantUML #baixar PlantUML para gerar diagramas
-        run: wget http://sourceforge.net/projects/plantuml/files/plantuml.jar/download -O plantuml.jar #baixar PlantUML
-
-      - name: Generate UML Diagrams #gerar diagramas UML
-        run: | #script para gerar diagramas UML
-          java -jar plantuml.jar -tpng -o diagrams uml/todos.puml
-
-      - name: List diagrams directory
+      - name: Download PlantUML # Baixar PlantUML para gerar diagramas
         run: |
-          ls -la diagrams/
+          wget https://github.com/plantuml/plantuml/releases/download/v1.2023.10/plantuml-1.2023.10.jar -O plantuml.jar # URL dinâmica para sempre pegar a versão mais recente
 
-      #      - name: Upload UML Diagrams #fazer o upload dos diagramas UML
-      #        uses: actions/upload-artifact@v4.4.3 #usar a action upload-artifact
-      #        with:
-      #          name: uml-diagrams # Nome do artefato
-      #          path: diagrams/ # Caminho para os arquivos a serem enviados
+      - name: Create diagrams directory # Criar o diretório diagrams caso não exista
+        run: mkdir -p diagrams # Criar o diretório onde os diagramas serão gerados
 
-      - name: Upload UML diagram as artifact
+      - name: Generate UML Diagrams # Gerar diagramas UML
+        run: |
+          java -jar plantuml.jar -tpng -o diagrams uml/todos.puml # Gerar os diagramas
+
+      - name: List diagrams directory # Verificar se os arquivos foram gerados
+        run: |
+          ls -la diagrams/ # Listar arquivos no diretório diagrams
+
+      - name: Upload UML diagram as artifact # Fazer o upload dos diagramas UML
         uses: actions/upload-artifact@v4.4.3
         with:
           name: uml-diagram
-          path: diagrams/*.png
+          path: diagrams/*.png # Caminho para os arquivos .png gerados
 
-      - name: Upload production-ready build files #fazer o upload dos arquivos de build ou deploy
+      - name: Upload production-ready build files # Fazer o upload dos arquivos de build ou deploy
         uses: actions/upload-artifact@v4.4.3
         with:
           name: build
-          path: dist
+          path: dist # Corrigir para o diretório correto de build do Vue.js
