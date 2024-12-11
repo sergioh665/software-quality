@@ -63,6 +63,8 @@ jobs:
 
       - name: Generate UML Diagram from test.puml
         run: |
+          echo "Contents of uml/test.puml before running PlantUML:"
+          cat uml/test.puml
           java -Djava.awt.headless=true -jar plantuml.jar -tpng -o generated_diagrams uml/test.puml -verbose
           echo "PlantUML command finished with status $?"
           ls -la generated_diagrams/
