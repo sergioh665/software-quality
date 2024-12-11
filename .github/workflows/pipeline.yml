@@ -53,6 +53,9 @@ jobs:
         run: |
           echo "@startuml\nAlice -> Bob: Hello\n@enduml" > uml/test.puml
 
+      - name: Ensure diagrams directory exists
+        run: mkdir -p diagrams
+
       - name: Generate UML Diagram from test.puml
         run: java -jar plantuml.jar -tpng -o diagrams uml/test.puml -verbose
 
