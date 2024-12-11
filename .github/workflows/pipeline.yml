@@ -37,13 +37,14 @@ jobs:
         run: jscpd AluguelFestas/src/views/Temas
 
       - name: Install Graphviz
-        run: sudo apt-get install graphviz
+        run: sudo apt-get install -y graphviz
 
       - name: Download PlantUML
         run: wget http://sourceforge.net/projects/plantuml/files/plantuml.jar/download -O plantuml.jar
 
       - name: Create simple UML file for testing
         run: |
+          mkdir -p uml
           echo "@startuml\nAlice -> Bob: Hello\nBob -> Alice: Hi\n@enduml" > uml/test.puml
 
       - name: List contents of the 'uml' directory to verify file creation
@@ -61,7 +62,7 @@ jobs:
 
       - name: Generate UML Diagram from test.puml
         run: |
-          java -jar plantuml.jar -tpng -o generated_diagrams uml/test.puml -verbose
+          java -Djava.awt.headless=true -jar plantuml.jar -tpng -o generated_diagrams uml/test.puml -verbose
 
       - name: List generated diagrams directory
         run: |
