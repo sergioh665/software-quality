@@ -51,6 +51,7 @@ jobs:
         run: |
           echo "Listing files in the uml directory:"
           ls -la uml/
+          cat uml/test.puml
 
       - name: Create output directory for diagrams
         run: mkdir -p generated_diagrams
@@ -75,5 +76,3 @@ jobs:
           name: uml-diagram
           path: generated_diagrams/*.png
           if-no-files-found: warn
-
-          
