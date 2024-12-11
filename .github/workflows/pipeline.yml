@@ -1,43 +1,85 @@
-name: Vue.js CI #nome do workflow
+name: Vue.js CI
 
-on: #definir quando o workflow será executado
-  push: #quando houver um push na branch main
+on:
+  push:
     branches:
       - main
-  pull_request: #quando houver um pull request na branch main
+  pull_request:
     branches:
       - main
 
-jobs: #definir o que sera executado
-  build: #nome do trabalho "job", pode ser qualquer um
-    runs-on: ubuntu-latest #definir o ambiente onde vai ser executado (ubuntu)
+jobs:
+  build:
+    runs-on: ubuntu-latest
 
-    steps: #passos
+    steps:
       - name: Checkout repository
         uses: actions/checkout@v4.2.1
 
-      - name: Set up Node.js #configurar o ambiente node
+      - name: Set up Node.js
         uses: actions/setup-node@v4.0.4
         with:
-          node-version: "21.7.1" #versão do node
+          node-version: "21.7.1"
 
-      - name: Install dependencies #instalar as dependencias
+      - name: Set up Java JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: "21"
+          distribution: "temurin"
+
+      - name: Install dependencies
         run: npm install
 
-      - name: Install jscpd globally #instalar jscpd globalmente
+      - name: Install jscpd globally
         run: npm install -g jscpd
 
-      - name: Check for code duplication #verificar duplicação de código nos arquivos especificados
-        run: jscpd AluguelFestas/src/views/Temas #verificar arquivos duplicados na pasta Temas
+      - name: Check for code duplication
+        run: jscpd AluguelFestas/src/views/Temas
 
-      #      - name: Run tests #rodar os testes(ainda falta criar os testes kkk)
-      #        run: npm run test
+      - name: Install Graphviz
+        run: sudo apt-get install -y graphviz
 
-      #      - name: Build project #buildar o projeto
-      #        run: npm run build
+      - name: Download PlantUML
+        run: wget http://sourceforge.net/projects/plantuml/files/plantuml.jar/download -O plantuml.jar
 
-      - name: Upload production-ready build files #fazer o upload dos arquivos de build ou deploy
+      - name: Create simple UML file for testing
+        run: |
+          mkdir -p uml
+          echo "@startuml" > uml/test.puml
+          echo "Alice -> Bob: Hello" >> uml/test.puml
+          echo "Bob -> Alice: Hi" >> uml/test.puml
+          echo "@enduml" >> uml/test.puml
+
+      - name: List contents of the 'uml' directory to verify file creation
+        run: |
+          echo "Listing files in the uml directory:"
+          ls -la uml/
+          cat uml/test.puml
+
+      - name: Create output directory for diagrams
+        run: mkdir -p generated_diagrams
+
+      - name: Verify if 'generated_diagrams' directory exists
+        run: |
+          echo "Listing files in generated_diagrams/:"
+          ls -la generated_diagrams/
+
+      - name: Generate UML Diagram from test.puml
+        run: |
+          echo "Contents of uml/test.puml before running PlantUML:"
+          cat uml/test.puml
+          java -Djava.awt.headless=true -jar plantuml.jar -tpng -o generated_diagrams uml/test.puml -verbose
+          echo "PlantUML command finished with status $?"
+          ls -la generated_diagrams/
+
+      - name: List generated diagrams directory
+        run: |
+          echo "Listing files in generated_diagrams/ after PlantUML generation:"
+          ls -la generated_diagrams/
+
+      - name: Upload UML diagram as artifact
         uses: actions/upload-artifact@v4.4.3
         with:
-          name: build
-          path: dist/
+          name: uml-diagram
+          path: generated_diagrams/*.png
+          if-no-files-found: warn
