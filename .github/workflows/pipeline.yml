@@ -54,19 +54,22 @@ jobs:
           echo "@startuml\nAlice -> Bob: Hello\n@enduml" > uml/test.puml
 
       - name: Ensure diagrams directory exists
-        run: mkdir -p diagrams
+        run: mkdir -p generated_diagrams
 
       - name: Generate UML Diagram from test.puml
-        run: java -jar plantuml.jar -tpng -o diagrams uml/test.puml -verbose
+        run: |
+          java -jar plantuml.jar -tpng -o generated_diagrams uml/test.puml -verbose || { echo 'PlantUML failed'; exit 1; }
 
-      - name: List diagrams directory
-        run: ls -la diagrams/
+      - name: List generated diagrams directory
+        run: |
+          echo "Listing files in generated_diagrams/ after PlantUML generation:";
+          ls -la generated_diagrams/
 
       - name: Upload UML diagram as artifact
         uses: actions/upload-artifact@v4.4.3
         with:
           name: uml-diagram
-          path: diagrams/*.png
+          path: generated_diagrams/*.png
 
       - name: Upload production-ready build files
         uses: actions/upload-artifact@v4.4.3
