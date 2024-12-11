@@ -42,10 +42,16 @@ jobs: # Definir o que será executado
       - name: Download PlantUML # Baixar PlantUML para gerar diagramas
         run: wget http://sourceforge.net/projects/plantuml/files/plantuml.jar/download -O plantuml.jar # Baixar PlantUML
 
-      # Criar um arquivo UML de teste simples para garantir que o PlantUML funcione corretamente
+      # Criar um arquivo UML simples para garantir que o PlantUML funcione corretamente
       - name: Create simple UML file for testing
         run: |
-          echo "@startuml\nAlice -> Bob: Hello\n@enduml" > uml/test.puml
+          echo "@startuml\nAlice -> Bob: Hello\nBob -> Alice: Hi\n@enduml" > uml/test.puml
+
+      # Verificar se o arquivo .puml foi criado corretamente
+      - name: List UML directory to check test.puml existence
+        run: |
+          echo "Listing files in the uml directory:"
+          ls -la uml/
 
       # Criar o diretório de saída para os diagramas gerados
       - name: Create output directory for diagrams
