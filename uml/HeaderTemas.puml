@@ -1,3 +1,0 @@
-class HeaderTemas {
-  +String iconPath
-}
