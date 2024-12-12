@@ -28,7 +28,7 @@ jobs: #definir o que sera executado
           distribution: "temurin" #distribuição
 
       - name: Install dependencies #instalar as dependencias
-        run: npm install #instalar as dependencias
+        run: npm install --prefix AluguelFestas #instalar as dependencias na pasta AluguelFestas
 
       - name: Install jscpd globally #instalar jscpd globalmente
         run: npm install -g jscpd #instalar jscpd globalmente
@@ -56,10 +56,10 @@ jobs: #definir o que sera executado
           path: ./todos.png # Caminho para o arquivo a ser enviado
 
       - name: Build project #buildar o projeto
-        run: npm run build
+        run: npm run build --prefix AluguelFestas #executar o build na pasta AluguelFestas
 
       - name: Upload production-ready build files #fazer o upload dos arquivos de build ou deploy
         uses: actions/upload-artifact@v4.4.3
         with:
           name: build
-          path: dist
+          path: AluguelFestas/dist #caminho para os arquivos de build
