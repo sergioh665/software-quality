@@ -42,6 +42,9 @@ jobs: #definir o que sera executado
       - name: Download PlantUML #baixar PlantUML para gerar diagramas
         run: wget http://sourceforge.net/projects/plantuml/files/plantuml.jar/download -O plantuml.jar #baixar PlantUML
 
+      - name: List files in the directory #listar arquivos no diretório
+        run: ls -la
+
       - name: Generate UML Diagrams #gerar diagramas UML
         run: | #script para gerar diagramas UML
           java -jar plantuml.jar -tpng todos.puml -o ./
