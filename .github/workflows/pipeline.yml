@@ -30,6 +30,9 @@ jobs: #definir o que sera executado
       - name: Install dependencies #instalar as dependencias
         run: npm install #instalar as dependencias
 
+      - name: Install Vue CLI globally #instalar Vue CLI globalmente
+        run: npm install -g @vue/cli #instalar Vue CLI globalmente
+
       - name: Install jscpd globally #instalar jscpd globalmente
         run: npm install -g jscpd #instalar jscpd globalmente
 
