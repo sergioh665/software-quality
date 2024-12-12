@@ -2,7 +2,8 @@
   "name": "software-quality",
   "version": "1.0.0",
   "devDependencies": {
-    "webpack-bundle-analyzer": "^4.10.2"
+    "webpack-bundle-analyzer": "^4.10.2",
+    "@vue/cli-service": "^4.5.0"
   },
   "scripts": {
     "build": "vue-cli-service build --report"
