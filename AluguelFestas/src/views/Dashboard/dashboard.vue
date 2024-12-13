@@ -50,7 +50,7 @@ Chart.register(...registerables);
         deep: true,
       },
     },
-    beforeDestroy() {
+    beforeUnmount() {
       if (this.doughnutChart) {
         this.doughnutChart.destroy();
       }
