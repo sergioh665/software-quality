@@ -140,7 +140,7 @@ export default {
         .get("/themes/")
         .then((res) => {
           res.data.map((item) => {
-            let nome = this.labels.find((element) => element == item.id);
+            let name = this.labels.find((element) => element == item.id);
             this.chartData.labels.push(item.name);
             console.log("teste", item.name);
           });
