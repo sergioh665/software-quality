@@ -60,3 +60,11 @@ jobs: #definir o que sera executado
         with:
           name: build
           path: AluguelFestas/dist #caminho para os arquivos de build
+
+      # - name: SonarCloud Scan #executar a análise do SonarCloud
+      #   uses: SonarSource/sonarcloud-github-action@v1.5
+      #   with:
+      #     project-key: ${{ secrets.SONAR_PROJECT_KEY }}
+      #     organization: ${{ secrets.SONAR_ORGANIZATION }}
+      #   env:
+      #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
