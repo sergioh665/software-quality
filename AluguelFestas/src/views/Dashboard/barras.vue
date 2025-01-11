@@ -36,9 +36,9 @@ export default defineComponent({
           labels: [],
           datasets: [
             {
-            label: "Vendas",
-            data: [],
-            backgroundColor: "#3366FF",
+              label: "Vendas",
+              data: [],
+              backgroundColor: "#3366FF",
             }
           ],
         },
@@ -60,7 +60,7 @@ export default defineComponent({
   methods: {
     renderBarChart() {
       const ctx = this.$refs.barChart.getContext("2d");
-      
+
       console.log("qqq", this.obj.data.datasets[0].data);
       new Chart(ctx, this.obj);
     },
@@ -69,7 +69,6 @@ export default defineComponent({
       for (const aluguel of alugueis) {
         const data = new Date(aluguel.date);
         const mes = data.getMonth() + 1;
-        const ano = data.getFullYear();
         const chave = `${mes}`;
 
         if (!recorrenciasPorMes.hasOwnProperty(chave)) {
@@ -97,7 +96,7 @@ export default defineComponent({
           console.log("FFF", recorrencia);
           recorrencia.map((item) => {
             console.log("map", item);
-            localData[item.mes -1] = item.recorrencias; // Correção do nome da propriedade
+            localData[item.mes - 1] = item.recorrencias; // Correção do nome da propriedade
           });
           this.obj.data.labels = this.dataT.labels;
           this.obj.data.datasets[0].data = localData;
