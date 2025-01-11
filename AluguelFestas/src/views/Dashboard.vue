@@ -105,8 +105,8 @@ export default {
         .get("/rents/")
         .then((res) => {
           temas = this.contarTemasEVariacoes(res.data);
-          
-          temas.map((item)=>{
+
+          temas.map((item) => {
             console.log(item.contagem);
             this.arrayPraFuncionar.push(item.contagem);
           });
@@ -114,7 +114,7 @@ export default {
           //Map do gráfico 02
           res.data.map((item) => {
             this.labels.push(item.theme);
-            var turno = this.verificarPeriodoDoDia(item.start_hours);
+            const turno = this.verificarPeriodoDoDia(item.start_hours);
             if (turno == "Manhã") {
               this.chartData2.datasets[0].data[0] =
                 this.chartData2.datasets[0].data[0] + 1;
@@ -128,7 +128,7 @@ export default {
           });
           //Map gráfico 01
           console.log("AAAA", temas);
-          res.data.map((item) => {});
+          res.data.map((item) => { });
         })
         .catch((error) => {
           console.log(error);
@@ -167,19 +167,23 @@ export default {
 h2 {
   color: black;
 }
+
 section {
   padding-top: 2vh;
   padding-left: 5vw;
   display: flex;
 }
+
 .graficoBola {
   width: 30vw;
   text-align: center;
 }
+
 .graficoBarras {
   width: 30vw;
   height: 380px;
 }
+
 .cards {
   display: flex;
   height: 60px;
@@ -197,9 +201,11 @@ section {
   font-weight: bold;
   color: white;
 }
+
 .livre {
   background-color: #b6c474;
 }
+
 .icon {
   margin-left: 10px;
   margin-right: 10px;
