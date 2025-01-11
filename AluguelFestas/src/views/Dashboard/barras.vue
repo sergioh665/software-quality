@@ -69,7 +69,6 @@ export default defineComponent({
       for (const aluguel of alugueis) {
         const data = new Date(aluguel.date);
         const mes = data.getMonth() + 1;
-        // const ano = data.getFullYear();
         const chave = `${mes}`;
 
         if (!recorrenciasPorMes.hasOwnProperty(chave)) {
