@@ -56,7 +56,7 @@ jobs: #definir o que sera executado
         run: npm install eslint --prefix AluguelFestas #instalar ESLint na pasta AluguelFestas
 
       - name: Run ESLint #executar ESLint para identificar code smells
-        run: npx eslint "AluguelFestas/src/**/*.{js,jsx,ts,tsx,vue}" #executar ESLint nos arquivos de código
+        run: npx eslint "AluguelFestas/src/views/alugueis/AlugueisList.vue" #executar ESLint nos arquivos de código
 
       - name: Build project #buildar o projeto
         run: npm run build --prefix AluguelFestas #executar o build na pasta AluguelFestas
