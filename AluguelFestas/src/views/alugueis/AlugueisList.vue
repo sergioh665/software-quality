@@ -108,8 +108,8 @@ export default {
                 .then((res) => {
                     this.alugueis = res.data;
                     console.log(res.data);
-                    alugueis.map((aluguel) =>{
-                        aluguel.theme = getTema(aluguel.theme);
+                    this.alugueis.map((aluguel) =>{
+                        aluguel.theme = this.getTema(aluguel.theme);
                     });
                 })
                 .catch((error) => {
