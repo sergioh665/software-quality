@@ -1,7 +1,10 @@
-import globals from "globals";
+// eslint.config.mjs
 import pluginJs from "@eslint/js";
 import tseslint from "typescript-eslint";
 import pluginVue from "eslint-plugin-vue";
+
+// Usando require ao invés de import
+const globals = require("globals");
 
 /** @type {import('eslint').Linter.Config} */
 export default {
@@ -9,7 +12,7 @@ export default {
     {
       files: ["**/*.{js,mjs,cjs,ts,vue}"],
       languageOptions: {
-        globals: globals.browser,  // Configuração correta de globals
+        globals: globals.browser,  // Utiliza globals diretamente
       },
       plugins: [
         pluginJs,
