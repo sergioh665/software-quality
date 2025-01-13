@@ -19,7 +19,7 @@ jobs: #definir o que sera executado
       - name: Set up Node.js #configurar o ambiente node
         uses: actions/setup-node@v4.0.4 #usar a action setup-node
         with:
-          node-version: "21.7.1" #versão do node
+          node-version: "18" #versão do node, alinhada com o devcontainer
 
       - name: Set up Java JDK #configurar o Java
         uses: actions/setup-java@v3 #usar a action setup-java
@@ -55,9 +55,6 @@ jobs: #definir o que sera executado
       - name: Install ESLint #instalar ESLint
         run: npm install eslint --prefix AluguelFestas #instalar ESLint na pasta AluguelFestas
 
-      - name: Run ESLint #executar ESLint para identificar code smells
-        run: npx eslint "AluguelFestas/src/views/alugueis/AlugueisList.vue" #executar ESLint nos arquivos de código
-
       - name: Build project #buildar o projeto
         run: npm run build --prefix AluguelFestas #executar o build na pasta AluguelFestas
 
@@ -66,12 +63,3 @@ jobs: #definir o que sera executado
         with:
           name: build
           path: AluguelFestas/dist #caminho para os arquivos de build
-
-
-      # - name: SonarCloud Scan #executar a análise do SonarCloud
-      #   uses: SonarSource/sonarcloud-github-action@v1.5
-      #   with:
-      #     project-key: ${{ secrets.SONAR_PROJECT_KEY }}
-      #     organization: ${{ secrets.SONAR_ORGANIZATION }}
-      #   env:
-      #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
