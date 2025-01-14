@@ -6,7 +6,7 @@ import FormItens from '../views/Itens/FormItens.vue'
 import Temas from '../views/Temas/Temas.vue'
 import FormTemas from '../views/Temas/FormTemas.vue'
 import FormAlugueis from '../views/alugueis/FormAlugueis.vue';
-import Alugueis from '../views/alugueis/Alugueis.vue';
+import Alugueis from '../views/alugueis/AlugueisList.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),

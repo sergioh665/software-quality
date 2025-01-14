@@ -2,7 +2,7 @@
   "name": "software-quality",
   "version": "1.0.0",
   "devDependencies": {
-    "@eslint/js": "^9.16.0",
+    "@eslint/js": "^9.18.0",
     "eslint": "^8.57.1",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-plugin-import": "^2.31.0",
@@ -15,7 +15,8 @@
     "webpack-bundle-analyzer": "^4.10.2"
   },
   "scripts": {
-    "build": "echo 'No build script defined for the root project'"
+    "build": "echo 'No build script defined for the root project'",
+    "lint": "eslint AluguelFestas/src --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
     "sonarqube-scanner": "^4.2.6"
