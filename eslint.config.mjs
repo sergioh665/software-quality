@@ -1,29 +1,33 @@
 // eslint.config.mjs
 import pluginJs from "@eslint/js";
-import tseslint from "typescript-eslint";
+import tseslint from "@typescript-eslint/eslint-plugin";
 import pluginVue from "eslint-plugin-vue";
+import pkg from "@eslint/js";
+const { ESLint } = pkg;
 
 // Usando require ao invés de import
 const globals = require("globals");
 
 /** @type {import('eslint').Linter.Config} */
 export default {
+  ignores: [
+    "node_modules/**",
+    "dist/**",
+    "build/**",
+  ],
   overrides: [
     {
-      files: ["**/*.{js,mjs,cjs,ts,vue}"],
+      files: ["**/*.ts", "**/*.tsx"],
       languageOptions: {
-        globals: globals.browser,  // Utiliza globals diretamente
+        parser: tseslint.parser,
       },
-      plugins: [
-        pluginJs,
-        pluginVue
-      ],
-      extends: [
-        pluginJs.configs.recommended,
+      plugins: {
+        "@typescript-eslint": tseslint,
+        vue: pluginVue,
+      },
+      rules: {
         ...tseslint.configs.recommended,
         ...pluginVue.configs["flat/essential"],
-      ],
-      rules: {
         "no-unused-vars": "warn",
         "vue/multi-word-component-names": "off",
       },
