@@ -2,11 +2,7 @@
 import pluginJs from "@eslint/js";
 import tseslint from "@typescript-eslint/eslint-plugin";
 import pluginVue from "eslint-plugin-vue";
-import pkg from "@eslint/js";
-const { ESLint } = pkg;
-
-// Usando require ao invés de import
-const globals = require("globals");
+import globals from "globals";
 
 /** @type {import('eslint').Linter.Config} */
 export default {
@@ -26,8 +22,8 @@ export default {
         vue: pluginVue,
       },
       rules: {
-        ...tseslint.configs.recommended,
-        ...pluginVue.configs["flat/essential"],
+        ...tseslint.configs.recommended.rules,
+        ...pluginVue.configs["flat/essential"].rules,
         "no-unused-vars": "warn",
         "vue/multi-word-component-names": "off",
       },
@@ -49,6 +45,5 @@ export default {
     "node_modules/",
     "config/*.js",
     "src/specific-folder/",
-    "src/**",  // Ignora todos os arquivos e pastas dentro de src
   ],
 };
