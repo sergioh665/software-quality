@@ -17,7 +17,7 @@ jobs: #definir o que sera executado
         uses: actions/checkout@v4.2.2 #usar a action checkout
 
       - name: Set up Node.js #configurar o ambiente node
-        uses: actions/setup-node@v4.0.4 #usar a action setup-node
+        uses: actions/setup-node@v4.2.0 #usar a action setup-node
         with:
           node-version: "18" #versão do node, alinhada com o devcontainer
 
