@@ -47,7 +47,7 @@ jobs: #definir o que sera executado
           java -jar diagramas/plantuml.jar -tpng diagramas/todos.puml -o ./
 
       - name: Upload UML Diagrams #fazer o upload dos diagramas UML
-        uses: actions/upload-artifact@v4.4.3 #usar a action upload-artifact
+        uses: actions/upload-artifact@v4.6.0 #usar a action upload-artifact
         with:
           name: uml-diagrams # Nome do artefato
           path: diagramas/todos.png # Caminho para o arquivo a ser enviado
@@ -62,7 +62,7 @@ jobs: #definir o que sera executado
         run: npm run build --prefix AluguelFestas #executar o build na pasta AluguelFestas
 
       - name: Upload production-ready build files #fazer o upload dos arquivos de build ou deploy
-        uses: actions/upload-artifact@v4.4.3
+        uses: actions/upload-artifact@v4.6.0
         with:
           name: build
           path: AluguelFestas/dist #caminho para os arquivos de build
