@@ -10,3 +10,13 @@ updates:
    directory: "/"
    schedule:
      interval: weekly
+
+- package-ecosystem: "npm"
+   directory: "/"
+   schedule:
+     interval: daily
+
+- package-ecosystem: "gitgub-actions"
+   directory: "/"
+   schedule:
+     interval: weekly
