@@ -22,7 +22,7 @@ jobs: #definir o que sera executado
           node-version: "18" #versão do node, alinhada com o devcontainer
 
       - name: Set up Java JDK #configurar o Java
-        uses: actions/setup-java@v3 #usar a action setup-java
+        uses: actions/setup-java@v4 #usar a action setup-java
         with:
           java-version: "21" #definir a versão do Java
           distribution: "temurin" #distribuição
