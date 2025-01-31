@@ -14,7 +14,7 @@ jobs: #definir o que sera executado
 
     steps: #passos
       - name: Checkout repository #clonar o repositório
-        uses: actions/checkout@v4.2.1 #usar a action checkout
+        uses: actions/checkout@v4.2.2 #usar a action checkout
 
       - name: Set up Node.js #configurar o ambiente node
         uses: actions/setup-node@v4.0.4 #usar a action setup-node
