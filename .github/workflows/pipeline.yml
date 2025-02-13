@@ -52,8 +52,8 @@ jobs: # Definir os jobs do pipeline
         run: npx eslint --config AluguelFestas/eslint.config.mjs "AluguelFestas/src/views/alugueis/AlugueisList.vue"
 
       - name: Check for deprecated code # Verificar APIs depreciadas
-        run: npx eslint --rule 'no-deprecated-api: warn' "AluguelFestas/src/**/*.js"
-
+        run: npx eslint --rule "no-deprecated-api:warn" AluguelFestas/src/**/*.js
+      
       - name: Run SonarQube Scanner # Executar SonarQube
         env:
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
