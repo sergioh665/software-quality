@@ -16,7 +16,8 @@
   },
   "scripts": {
     "build": "echo 'No build script defined for the root project'",
-    "lint": "eslint AluguelFestas/src --ext .js,.jsx,.ts,.tsx"
+    "lint": "eslint AluguelFestas/src --ext .js,.jsx,.ts,.tsx",
+    "lint:deprecated": "eslint --rule 'no-deprecated-api: warn' AluguelFestas/src/**/*.js"
   },
   "dependencies": {
     "sonarqube-scanner": "^4.2.6"
