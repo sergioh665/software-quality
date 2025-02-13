@@ -58,6 +58,9 @@ jobs: #definir o que sera executado
       - name: Run ESLint
         run: npx eslint --config AluguelFestas/eslint.config.mjs "AluguelFestas/src/views/alugueis/AlugueisList.vue"
 
+      - name: Run ESLint (Check for Deprecations)
+        run: npx eslint "AluguelFestas/src/views/Temas**/*.vue" --config AluguelFestas/eslint.config.mjs --max-warnings 0
+
       - name: Build project #buildar o projeto
         run: npm run build --prefix AluguelFestas #executar o build na pasta AluguelFestas
 
