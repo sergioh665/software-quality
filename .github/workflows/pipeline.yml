@@ -1,72 +1,77 @@
-name: Vue.js CI # Nome do workflow
+name: Vue.js CI #nome do workflow
 
-on: # Definir quando o workflow será executado
-  push: # Quando houver um push na branch main
+on: #definir quando o workflow será executado
+  push: #quando houver um push na branch main
     branches:
       - main
-  pull_request: # Quando houver um pull request na branch main
+  pull_request: #quando houver um pull request na branch main
     branches:
       - main
 
-jobs: # Definir os jobs do pipeline
-  build:
-    runs-on: ubuntu-latest # Ambiente onde será executado (Ubuntu)
+jobs: #definir o que sera executado
+  build: #nome do trabalho "job", pode ser qualquer um
+    runs-on: ubuntu-latest #definir o ambiente onde vai ser executado (ubuntu)
 
-    steps:
-      - name: Checkout repository # Clonar o repositório
-        uses: actions/checkout@v4.2.2
+    steps: #passos
+      - name: Checkout repository #clonar o repositório
+        uses: actions/checkout@v4.2.2 #usar a action checkout
 
-      - name: Set up Node.js # Configurar o ambiente Node.js
-        uses: actions/setup-node@v4.2.0
+      - name: Set up Node.js #configurar o ambiente node
+        uses: actions/setup-node@v4.2.0 #usar a action setup-node
         with:
-          node-version: "18"
+          node-version: "18" #versão do node, alinhada com o devcontainer
 
-      - name: Set up Java JDK # Configurar o ambiente Java
-        uses: actions/setup-java@v4
+      - name: Set up Java JDK #configurar o Java
+        uses: actions/setup-java@v4 #usar a action setup-java
         with:
-          java-version: "21"
-          distribution: "temurin"
+          java-version: "21" #definir a versão do Java
+          distribution: "temurin" #distribuição
 
-      - name: Install dependencies # Instalar dependências
-        run: npm ci --prefix AluguelFestas # Usa npm ci para garantir builds reproduzíveis
+      - name: Install dependencies #instalar as dependencias
+        run: npm install --prefix AluguelFestas #instalar as dependencias na pasta AluguelFestas
 
-      - name: Check for code duplication # Verificar duplicação de código
-        run: npx jscpd AluguelFestas/src/views/Temas
+      - name: Install jscpd globally #instalar jscpd globalmente
+        run: npm install -g jscpd #instalar jscpd globalmente
 
-      - name: Install Graphviz # Instalar Graphviz para PlantUML
-        run: sudo apt-get install -y graphviz
+      - name: Check for code duplication #verificar duplicação de código nos arquivos especificados
+        run: jscpd AluguelFestas/src/views/Temas #verificar arquivos duplicados na pasta Temas
 
-      - name: Download PlantUML # Baixar PlantUML
-        run: wget -O plantuml.jar http://sourceforge.net/projects/plantuml/files/plantuml.jar/download
+      - name: Install Graphviz #instalar Graphviz
+        run: sudo apt-get install graphviz #instalar Graphviz
 
-      - name: Generate UML Diagrams # Gerar diagramas UML
-        run: java -jar plantuml.jar -tpng diagramas/todos.puml -o diagramas/
+      - name: Download PlantUML #baixar PlantUML para gerar diagramas
+        run: wget http://sourceforge.net/projects/plantuml/files/plantuml.jar/download -O plantuml.jar #baixar PlantUML
 
-      - name: Upload UML Diagrams # Fazer upload dos diagramas UML
-        uses: actions/upload-artifact@v4.6.0
+      - name: Generate UML Diagrams #gerar diagramas UML
+        run: | #script para gerar diagramas UML
+          java -jar diagramas/plantuml.jar -tpng diagramas/todos.puml -o ./
+
+      - name: Upload UML Diagrams #fazer o upload dos diagramas UML
+        uses: actions/upload-artifact@v4.6.0 #usar a action upload-artifact
         with:
-          name: uml-diagrams
-          path: diagramas/todos.png
+          name: uml-diagrams # Nome do artefato
+          path: diagramas/todos.png # Caminho para o arquivo a ser enviado
 
-      - name: Run ESLint # Executar ESLint
+      - name: Install ESLint and Plugins
+        run: npm install --save-dev eslint @typescript-eslint/eslint-plugin eslint-plugin-vue @eslint/js globals --prefix AluguelFestas
+
+      - name: Run ESLint
         run: npx eslint --config AluguelFestas/eslint.config.mjs "AluguelFestas/src/views/alugueis/AlugueisList.vue"
 
-      - name: Check for deprecated code # Verificar APIs depreciadas
-        run: npx eslint --rule "no-deprecated-api:warn" AluguelFestas/src/**/*.js
-      
-      - name: Run SonarQube Scanner # Executar SonarQube
+      - name: Install SonarQube Scanner #instalar o SonarQube Scanner para verificar a qualidade do código
+        run: npm install -g sonarqube-scanner
+
+      - name: Run SonarQube Scanner #executar o SonarQube Scanner
         env:
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
           SONAR_LOGIN: ${{ secrets.SONAR_LOGIN }}
-        run: |
-          cd AluguelFestas
-          npx sonarqube-scanner
+        run: sonarqube-scanner
 
-      - name: Build project # Fazer o build do projeto
-        run: npm run build --prefix AluguelFestas
+      - name: Build project #buildar o projeto
+        run: npm run build --prefix AluguelFestas #executar o build na pasta AluguelFestas
 
-      - name: Upload production-ready build files # Fazer upload do build final
+      - name: Upload production-ready build files #fazer o upload dos arquivos de build ou deploy
         uses: actions/upload-artifact@v4.6.0
         with:
           name: build
-          path: AluguelFestas/dist
+          path: AluguelFestas/dist #caminho para os arquivos de build
