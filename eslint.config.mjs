@@ -11,11 +11,14 @@ export default {
     "dist/**",
     "build/**",
   ],
+  languageOptions: {
+    globals: globals.browser,
+  },
   overrides: [
     {
       files: ["**/*.ts", "**/*.tsx"],
       languageOptions: {
-        parser: tseslint.parser,
+        parser: "@typescript-eslint/parser",
       },
       plugins: {
         "@typescript-eslint": tseslint,
@@ -23,7 +26,7 @@ export default {
       },
       rules: {
         ...tseslint.configs.recommended.rules,
-        ...pluginVue.configs["flat/essential"].rules,
+        ...pluginVue.configs["essential"].rules,
         "no-unused-vars": "warn",
         "vue/multi-word-component-names": "off",
       },
@@ -31,13 +34,22 @@ export default {
     {
       files: ["**/*.vue"],
       languageOptions: {
-        parserOptions: { parser: tseslint.parser },
+        parser: "vue-eslint-parser",
+        parserOptions: {
+          parser: "@typescript-eslint/parser",
+        },
+      },
+      plugins: {
+        vue: pluginVue,
+      },
+      rules: {
+        ...pluginVue.configs["essential"].rules,
       },
     },
     {
       files: ["src/views/**/*.js"],
       rules: {
-        "no-console": "error",
+        "no-deprecated-api": "warn",
       },
     },
   ],
