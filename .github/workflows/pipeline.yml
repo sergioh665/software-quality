@@ -58,14 +58,14 @@ jobs: #definir o que sera executado
       - name: Run ESLint
         run: npx eslint --config AluguelFestas/eslint.config.mjs "AluguelFestas/src/views/alugueis/AlugueisList.vue"
 
-      - name: Install SonarQube Scanner #instalar o SonarQube Scanner para verificar a qualidade do código
-        run: npm install -g sonarqube-scanner
+      - name: Install SonarQube Scanner
+        run: npm install sonarqube-scanner --prefix AluguelFestas
 
-      - name: Run SonarQube Scanner #executar o SonarQube Scanner
+      - name: Run SonarQube Scanner
+        run: npx sonarqube-scanner --prefix AluguelFestas
         env:
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
           SONAR_LOGIN: ${{ secrets.SONAR_LOGIN }}
-        run: sonarqube-scanner
 
       - name: Build project #buildar o projeto
         run: npm run build --prefix AluguelFestas #executar o build na pasta AluguelFestas
