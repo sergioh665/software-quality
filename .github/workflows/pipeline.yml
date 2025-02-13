@@ -59,7 +59,7 @@ jobs: #definir o que sera executado
         run: npx eslint --config AluguelFestas/eslint.config.mjs "AluguelFestas/src/views/alugueis/AlugueisList.vue"
 
       - name: Install SonarQube Scanner
-        run: npm install sonarqube-scanner
+        run: npm install sonarqube-scanner --legacy-peer-deps
 
       - name: Run SonarQube Scanner
         run: cd AluguelFestas && npx sonarqube-scanner
