@@ -61,6 +61,15 @@ jobs: #definir o que sera executado
       - name: Check for deprecated code #verificar se está usando api depreciada 
         run: "npx eslint --rule 'no-deprecated-api: warn' \"AluguelFestas/src/**/*.js\""
 
+      - name: Install SonarQube Scanner #instalar o SonarQube Scanner para verificar a qualidade do código
+        run: npm install -g sonarqube-scanner
+
+      - name: Run SonarQube Scanner #executar o SonarQube Scanner
+        env:
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+          SONAR_LOGIN: ${{ secrets.SONAR_LOGIN }}
+        run: sonarqube-scanner
+
       - name: Build project #buildar o projeto
         run: npm run build --prefix AluguelFestas #executar o build na pasta AluguelFestas
 
