@@ -16,7 +16,7 @@ import { mdiAccountGroup } from '@mdi/js';
             <label for="descricao">Preço</label>
             <input type="text" class="input-text" v-model="tema.price" placeholder="200,00" name="preco" id="preco"
                 required>
-            <div v-for="(item) in itens">
+            <div v-for="(item) in itens" :key="item.id">
                 <input type="checkbox" class="check" :id="item.id" :value="item.id" v-model="selectedItems">
                 <label for="subscribeNews"> {{ item.name }} </label>
             </div>
