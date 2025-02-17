@@ -11,7 +11,7 @@
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-vue": "^9.32.0",
     "globals": "^15.15.0",
-    "typescript-eslint": "^8.18.0",
+    "typescript-eslint": "^8.24.1",
     "webpack-bundle-analyzer": "^4.10.2"
   },
   "scripts": {
