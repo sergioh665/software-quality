@@ -19,6 +19,6 @@
     "lint": "eslint AluguelFestas/src --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
-    "sonarqube-scanner": "^4.2.6"
+    "sonarqube-scanner": "^4.2.7"
   }
 }
